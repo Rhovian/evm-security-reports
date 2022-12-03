@@ -5,6 +5,9 @@
 *A malicious validator can frontrun depositEther transaction for its pubKey and deposit 1 ether for different withdrawal credential, thereby setting withdrawal credit before deposit of 32 ether by contract and thereby when 32 deposit ether are deposited, the withdrawal credential is also what was set before rather than the one being sent in depositEther transaction.*
 <br>
 
+## Github Issue
+- [H-02](https://github.com/code-423n4/2022-09-frax-findings/issues/81)
+
 Essentially, this issue with regards to delegated validators specifically, allowing a node operator to (frontrun) the (withdrawal credentials) of an intended deposit, as the initial deposit is the only one able to set the withdrawal credentials.
 
 More information on the exploit can be found [here](https://ethresear.ch/t/deposit-contract-exploit/6528):
@@ -31,10 +34,6 @@ Notably, this issue had some contention from Frax, as it is arguably non-critica
 *it would require a validator to act maliciously by using a smaller than 32 ETH deposit to front run your deposit and enable them to control the withdrawal in the future. If the validator is owned by your team and the keys are never exploited, then I don’t see how the front ran signature could be generated.*
 
 In summary, his vulnerability requires a malicious validator to generate a valid signature, and since Frax has ownership of all validators, and trust would be implicit for any users, the vulnerability could be contended. However, since Frax did not specify that they own all validator keys, the high severity payout was awarded.
-
-
-## Github Issue
-- [H-02](https://github.com/code-423n4/2022-09-frax-findings/issues/81)
 
 ## Resources
 
