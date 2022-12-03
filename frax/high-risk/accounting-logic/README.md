@@ -1,5 +1,8 @@
 # Bug Notes
 
+This is a critical issue regarding an incorrect sequence of operations in the ``xERC4626`` implementation of ``beforeWithdraw``, resulting in an unrecoverable state for users via an underflow condition. A smaller vulnerability is also present in that the accounting would be off for rewards, until the eventual underflow happens and the system stops working as intended. Very cool find!
+<br>
+
 ## Github Issue
 - [H-01](https://github.com/code-423n4/2022-09-frax-findings/issues/15)
 
