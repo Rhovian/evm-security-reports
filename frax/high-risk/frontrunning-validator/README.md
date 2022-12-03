@@ -23,6 +23,8 @@ More information on the exploit can be found [here](https://ethresear.ch/t/depos
 *The general issue is that there is no check that a given deposit is either new or has the same withdrawal credentials if its validator key matches one for a previous deposit.*
 <br>
 
+--- 
+
 Notably, this issue had some contention from Frax, as it is arguably non-critical as Frax retains ownership of all of the validators, meaning that they would be the only ones able to produce a valid signature:
 <br>
 
