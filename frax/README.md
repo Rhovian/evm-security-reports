@@ -18,3 +18,9 @@ An "xToken" popularized by SushiSwap with xSUSHI is a single-sided autocompoundi
 ## Super
 Gives access to the immediate parent contract from which the current contract is derived.
 
+## Elliptic Curve Cryptography
+TBI
+
+## Boneh-Lynn-Shacham (BLS)
+TBI
+
