@@ -47,6 +47,21 @@ At this point, I found myself needing to define ``syncRewards()`` for context: <
         emit NewRewardsCycle(end, nextRewards);
     }
 ```
+<br>
+
+*Therefore, the following calculation will be inflated by the amount for which the withdrawal was requested:*
+
+```solidity
+uint256 nextRewards = asset.balanceOf(address(this)) - storedTotalAssets_ - lastRewardAmount_;
+```
+<br>
+
+The auditors point out several implications which I will reiterate below: <br>
+
+- Since ``lastRewardAmount`` is set to ``nextRewards``, which is now inflated, the next cycle would **pay out too much**.
+- An underflow is possible if ``lastRewardAmount > asset.balanceOf(address(this))``.
+
+Essentially, **syncRewards() after xERC4626's beforeWithdraw() can result in wrong reward amount #306**
 
 
 
