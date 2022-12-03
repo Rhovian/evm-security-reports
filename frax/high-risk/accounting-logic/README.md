@@ -1,7 +1,7 @@
 # Bug Notes
 
 ## Github Issue
-- (H-01)[https://github.com/code-423n4/2022-09-frax-findings/issues/15]
+- [H-01](https://github.com/code-423n4/2022-09-frax-findings/issues/15)
 
 
 *sfrxETH.beforeWithdraw first calls the beforeWithdraw of xERC4626, which decrements storedTotalAssets by the given amount.*

@@ -1,15 +1,15 @@
 # Bug Notes
 
 ## Github Issue
-(H-02)[https://github.com/code-423n4/2022-09-frax-findings/issues/81]
+- [H-02](https://github.com/code-423n4/2022-09-frax-findings/issues/81)
 
 ## Resources
 
-(eth 2.0 deposits)[https://kb.beaconcha.in/ethereum-2.0-depositing]
-(eth 2.0 keys)[https://kb.beaconcha.in/ethereum-2-keys]
-(front-running vulnerability)[https://research.lido.fi/t/mitigations-for-deposit-front-running-vulnerability/1239]
-(vulnerability fix by Lido & Rocketpool)[https://medium.com/immunefi/rocketpool-lido-frontrunning-bug-fix-postmortem-e701f26d7971]
-(deposit-contract)[https://github.com/ethereum/consensus-specs/blob/dev/solidity_deposit_contract/deposit_contract.sol]
+- [eth 2.0 deposits](https://kb.beaconcha.in/ethereum-2.0-depositing)
+- [eth 2.0 keys](https://kb.beaconcha.in/ethereum-2-keys)
+- [front-running vulnerability](https://research.lido.fi/t/mitigations-for-deposit-front-running-vulnerability/1239)
+- [vulnerability fix by Lido & Rocketpool](https://medium.com/immunefi/rocketpool-lido-frontrunning-bug-fix-postmortem-e701f26d7971)
+- [deposit-contract](https://github.com/ethereum/consensus-specs/blob/dev/solidity_deposit_contract/deposit_contract.sol)
 
 *Frontrunning by malicious validator changing withdrawal credentials.*
 <br>
@@ -19,7 +19,7 @@
 
 Essentially, this issue with regards to delegated validators specifically, allowing a node operator to (frontrun) the (withdrawal credentials) of an intended deposit, as the initial deposit is the only one able to set the withdrawal credentials.
 
-More information on the exploit can be found (here)[https://ethresear.ch/t/deposit-contract-exploit/6528]:
+More information on the exploit can be found [here](https://ethresear.ch/t/deposit-contract-exploit/6528):
 <br>
 
 *There is a front-running exploit in the deposit contract that allows validator key holders to front-run withdrawal key holders and steal their funds. The exploit goes as follows:*
