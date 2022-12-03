@@ -1,0 +1,3 @@
+[submodule "playground/lib/solmate"]
+	path = playground/lib/solmate
+	url = https://github.com/transmissions11/solmate
