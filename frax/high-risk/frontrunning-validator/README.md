@@ -1,3 +1,8 @@
+## Resources
+
+- (eth 2.0 deposits)[https://kb.beaconcha.in/ethereum-2.0-depositing]
+- (eth 2.0 keys)[https://kb.beaconcha.in/ethereum-2-keys]
+
 *Frontrunning by malicious validator changing withdrawal credentials.*
 <br>
 
