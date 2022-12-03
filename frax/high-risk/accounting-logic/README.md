@@ -8,3 +8,6 @@
         storedTotalAssets -= amount;
     }
 ```
+<br>
+
+*If the timestamp is greater than the rewardsCycleEnd, syncRewards is called. However, the problem is that the assets have not been transfered out yet, meaning asset.balanceOf(address(this)) still has the old value.*
