@@ -10,6 +10,8 @@ Essentially, this issue with regards to delegated validators specifically, allow
 More information on the exploit can be found [here](https://ethresear.ch/t/deposit-contract-exploit/6528):
 <br>
 
+---
+
 *There is a front-running exploit in the deposit contract that allows validator key holders to front-run withdrawal key holders and steal their funds. The exploit goes as follows:*
 
 - “friendly staking service” (FSS) offers to run a validator for a user, with the user retaining access to their funds via the withdrawal key
