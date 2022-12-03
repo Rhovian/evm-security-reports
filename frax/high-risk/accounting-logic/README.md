@@ -117,11 +117,29 @@ uint256 nextRewards = asset.balanceOf(address(this)) - storedTotalAssets_ - last
 
 When the test calls ``rewardSync()`` again, this is what the state looks like, resulting in the underflow:
 
-```
+```solidity
 // asset.balanceOf(address(this)) = 0 ether
 // storedTotalAssets_ = 0 
 // lastRewardAmount = 1 ether
 uint256 nextRewards = asset.balanceOf(address(this)) - storedTotalAssets_ - lastRewardAmount_;
 ```
+<br>
 
+The solution is then to call syncRewards() before decrementing storedTotalAssets, i.e.:
+
+```solidity
+function beforeWithdraw(uint256 assets, uint256 shares) internal override {
+	if (block.timestamp >= rewardsCycleEnd) { syncRewards(); }
+	super.beforeWithdraw(assets, shares); // call xERC4626's beforeWithdraw AFTER
+}
+```
+<br>
+
+Going back to the test above, we can see the following state on withdrawal:
+```solidity
+// asset.balanceOf(address(this)) = 0 ether
+// storedTotalAssets_ = 0 
+// lastRewardAmount = 0 ether
+uint256 nextRewards = asset.balanceOf(address(this)) - storedTotalAssets_ - lastRewardAmount_;
+```
 
