@@ -61,8 +61,67 @@ The auditors point out several implications which I will reiterate below: <br>
 - Since ``lastRewardAmount`` is set to ``nextRewards``, which is now inflated, the next cycle would **pay out too much**.
 - An underflow is possible if ``lastRewardAmount > asset.balanceOf(address(this))``.
 
-Essentially, **syncRewards() after xERC4626's beforeWithdraw() can result in wrong reward amount #306**
+Essentially, syncRewards() after xERC4626's beforeWithdraw() can result in wrong reward amount. This is exemplified in the following PoC test:<br>
+
+```solidity
+function testTotalAssetsAfterWithdraw() public {        
+        uint128 deposit = 1 ether;
+        uint128 withdraw = 1 ether;
+        // Mint frxETH to this testing contract from nothing, for testing
+        mintTo(address(this), deposit);
+        // Generate some sfrxETH to this testing contract using frxETH
+        frxETHtoken.approve(address(sfrxETHtoken), deposit);
+        sfrxETHtoken.deposit(deposit, address(this));
+        require(sfrxETHtoken.totalAssets() == deposit);
+        vm.warp(block.timestamp + 1000);
+        // Withdraw frxETH (from sfrxETH) to this testing contract
+        sfrxETHtoken.withdraw(withdraw, address(this), address(this));
+        vm.warp(block.timestamp + 1000);
+        sfrxETHtoken.syncRewards();
+        require(sfrxETHtoken.totalAssets() == deposit - withdraw);
+    }
+```
+<br>
+
+Here, we deposit 1 ether into the ``sfrxETHToken`` contract, increasing the ``storedAssets`` by the deposit amount:
+
+```solidity
+  function afterDeposit(uint256 amount, uint256 shares) internal virtual override {
+        storedTotalAssets += amount;
+        super.afterDeposit(amount, shares);
+    }
+```
+<br>
+
+Then, after some time, the ``withdraw`` function is called that contains the vulnerability in ``beforeWithdraw``:
+
+```solidity
+    function beforeWithdraw(uint256 amount, uint256 shares) internal virtual override {
+        super.beforeWithdraw(amount, shares);
+        storedTotalAssets -= amount;
+    }
+```
+<br>
+
+After this withdraw is called, we now know that ``lastRewardAmount`` will be inflated by the withdrawal amount, and that ``storedTotalAssets`` will be decremented by 1 ether.
+<br>
 
 
+```solidity
+// asset.balanceOf(address(this)) = 1 ether
+// storedTotalAssets_ = 0 
+// lastRewardAmount = 0
+uint256 nextRewards = asset.balanceOf(address(this)) - storedTotalAssets_ - lastRewardAmount_;
+```
+<br>
+
+When the test calls ``rewardSync()`` again, this is what the state looks like, resulting in the underflow:
+
+```
+// asset.balanceOf(address(this)) = 0 ether
+// storedTotalAssets_ = 0 
+// lastRewardAmount = 1 ether
+uint256 nextRewards = asset.balanceOf(address(this)) - storedTotalAssets_ - lastRewardAmount_;
+```
 
 
