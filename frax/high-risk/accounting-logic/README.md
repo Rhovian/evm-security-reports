@@ -135,7 +135,7 @@ function beforeWithdraw(uint256 assets, uint256 shares) internal override {
 ```
 <br>
 
-Going back to the test above, we can see the following state on withdrawal:
+Going back to the test above, we can see the following state on ``withdrawal`` and next ``rewardSync`` calls:
 ```solidity
 // asset.balanceOf(address(this)) = 0 ether
 // storedTotalAssets_ = 0 
