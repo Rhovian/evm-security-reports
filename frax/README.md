@@ -7,7 +7,7 @@ source code: https://github.com/code-423n4/2022-09-frax
 
 ## ERC 4626 - Tokenized Vault Standard
 
-*[ERC-4626](https://ethereum.org/en/developers/docs/standards/tokens/erc-4626/){:target="_blank"} is a standard to optimize and unify the technical parameters of yield-bearing vaults. It provides a standard API for tokenized yield-bearing vaults that represent shares of a single underlying ERC-20 token. ERC-4626 also outlines an optional extension for tokenized vaults utilizing ERC-20, offering basic functionality for depositing, withdrawing tokens and reading balances.*
+*[ERC-4626](https://github.com/transmissions11/solmate/blob/main/src/mixins/ERC4626.sol) is a standard to optimize and unify the technical parameters of yield-bearing vaults. It provides a standard API for tokenized yield-bearing vaults that represent shares of a single underlying ERC-20 token. ERC-4626 also outlines an optional extension for tokenized vaults utilizing ERC-20, offering basic functionality for depositing, withdrawing tokens and reading balances.*
 
 ### xERC 4626
 
