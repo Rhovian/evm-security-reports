@@ -1,4 +1,4 @@
-# Bug Explanation
+# Bug Notes
 
 *sfrxETH.beforeWithdraw first calls the beforeWithdraw of xERC4626, which decrements storedTotalAssets by the given amount.*
 
