@@ -64,7 +64,6 @@ for (uint256 i = 0; i < original_validators.length; ++i) {
     }
 }
 /** Optimized */
-
 uint256 length = validators.length - 1;
 
 unchecked {
@@ -72,7 +71,6 @@ unchecked {
         validators[i] = validators[i + 1]
     }
 }
-
 validators.pop()
 ```
 
