@@ -13,7 +13,7 @@ source code: https://github.com/code-423n4/2022-09-frax
 
 [xERC-4626](https://github.com/fei-protocol/ERC4626/blob/main/src/xERC4626.sol)
 
-An "xToken" popularized by SushiSwap with xSUSHI is a single-sided autocompounding token rewards module.
+*An "xToken" popularized by SushiSwap with xSUSHI is a single-sided autocompounding token rewards module.*
 
 ## Super
 Gives access to the immediate parent contract from which the current contract is derived.
