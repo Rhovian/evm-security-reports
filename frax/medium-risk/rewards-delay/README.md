@@ -8,4 +8,26 @@
 
 ---
 
+The crux of this issue is with regards to the ``xERC4626 syncRewards`` function, defined below:
 
+```solidity
+// lib/ERC4626/src/xERC4626.sol
+function syncRewards() public virtual {
+    // ...
+    uint256 nextRewards = asset.balanceOf(address(this)) - storedTotalAssets_ - lastRewardAmount_;
+    storedTotalAssets = storedTotalAssets_ + lastRewardAmount_;
+    uint32 end = ((timestamp + rewardsCycleLength) / rewardsCycleLength) * rewardsCycleLength;
+    lastRewardAmount = nextRewards.safeCastTo192();
+    // ...        
+    rewardsCycleEnd = end;
+}
+```
+<br>
+
+The first vulnerability is defined as follows:
+<br>
+
+*If withdraw just after the rewardsCycleEnd timestamp, a user can not get the yields from last rewards cycle. Since the totalAssets() only contain storedTotalAssets but not the yields part. It takes 1 rewards cycle to linearly add to the storedTotalAssets.*
+<br>
+
+I found this [explanation](https://github.com/code-423n4/2022-09-frax-findings/issues/308) to be the most intuitive. Essentially, if ``syncRewards`` is not called before deposits, withdrawals, or redeem, the disparity between the actual yield in the contract and what is used to calculate ``totalAssets`` could grow quite large.
