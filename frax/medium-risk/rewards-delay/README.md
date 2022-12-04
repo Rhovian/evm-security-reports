@@ -31,3 +31,27 @@ The first vulnerability is defined as follows:
 <br>
 
 I found this [explanation](https://github.com/code-423n4/2022-09-frax-findings/issues/308) to be the most intuitive. Essentially, if ``syncRewards`` is not called before deposits, withdrawals, or redeem, the disparity between the actual yield in the contract and what is used to calculate ``totalAssets`` could grow quite large.
+
+```solidity
+    function totalAssets() public view override returns (uint256) {
+        // cache global vars
+        uint256 storedTotalAssets_ = storedTotalAssets;
+        uint192 lastRewardAmount_ = lastRewardAmount;
+        uint32 rewardsCycleEnd_ = rewardsCycleEnd;
+        uint32 lastSync_ = lastSync;
+
+        if (block.timestamp >= rewardsCycleEnd_) {
+            // no rewards or rewards fully unlocked
+            // entire reward amount is available
+            return storedTotalAssets_ + lastRewardAmount_;
+        }
+
+        // rewards not fully unlocked
+        // add unlocked rewards to stored total
+        uint256 unlockedRewards = (lastRewardAmount_ * (block.timestamp - lastSync_)) / (rewardsCycleEnd_ - lastSync_);
+        return storedTotalAssets_ + unlockedRewards;
+    }
+```
+<br>
+
+You can imagine that if ``syncRewards()`` is never called, or more stringently not called on every period start, this function will always return ``storedTotalAssets_ + lastRewardAmount_;`` instead of linearly interpolating.
