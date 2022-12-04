@@ -24,3 +24,12 @@ TBI
 ## Boneh-Lynn-Shacham (BLS)
 TBI
 
+# Findings not covered in detail
+
+- [M-04](https://code4rena.com/reports/2022-09-frax/#m-04-removevalidator-and-removeminter-may-fail-due-to-exceeding-gas-limit)
+- [M-05](https://code4rena.com/reports/2022-09-frax/#m-05-frxethminterdepositether-may-run-out-of-gas-leading-to-lost-eth)
+- [M-09](https://code4rena.com/reports/2022-09-frax/#m-09-recoverether-not-updating-currentwithheldeth-breaks-calculation-of-withheld-amount-for-further-deposits)
+
+## Reasoning
+TBI
+
