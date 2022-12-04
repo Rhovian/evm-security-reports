@@ -39,4 +39,8 @@ TBI
 See [this](https://github.com/code-423n4/2022-09-frax-findings/issues/155) github issue. It was awarded top marks by wardens.
 <br>
 
-- [L-01] Missing zero address checks
+- Missing zero address checks
+- Draft OpenZeppelin Dependencies
+- Don't use owner and timelock: *Using a timelock contract gives confidence to the user, but using it in conjunction with an owner defeats the purpose of the timelock*
+
+**note that non-critical bugs are not explored here**
