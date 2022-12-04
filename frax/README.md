@@ -33,3 +33,7 @@ TBI
 ## Reasoning
 TBI
 
+
+# Low Severity Bugs
+
+See [this](https://github.com/code-423n4/2022-09-frax-findings/issues/155) github issue. It was awarded top marks by wardens.
