@@ -98,6 +98,17 @@ if(msg.sender != timelock_address && msg.sender != owner) revert NotOwnerOrTimel
 // back. This is the compiler's defense against contract upgrades and
 // pointer aliasing, and it cannot be disabled.
 ```
+<br>
 
+- **[Unchecking](https://docs.soliditylang.org/en/v0.8.10/control-structures.html#checked-or-unchecked-arithmetic) Arithmetic operations that cannot underflow**
+- **Storage pointer to a structure is cheaper than copying each value of the structure to memory (for arrays and mapping only?)**
 
+```solidity
+// expensive
+Validator memory v = validators[i];
+// cheaper
+Validator storage v = validators[i];
+```
+<br>
 
+- **X = X + Y is more efficient than X += Y**
