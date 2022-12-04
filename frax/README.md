@@ -44,3 +44,36 @@ See [this](https://github.com/code-423n4/2022-09-frax-findings/issues/155) githu
 - Don't use owner and timelock: *Using a timelock contract gives confidence to the user, but using it in conjunction with an owner defeats the purpose of the timelock*
 
 **note that non-critical bugs are not explored here**
+
+# Gas Optimizations
+
+- Deleting array element can use a more efficient algorithm. Found [here](https://github.com/code-423n4/2022-09-frax/blob/55ea6b1ef3857a277e2f47d42029bc0f3d6f9173/src/OperatorRegistry.sol#L107-L116) <br>
+
+```solidity
+/** Not Optimized */
+// Save the original validators
+Validator[] memory original_validators = validators;
+
+// Clear the original validators list
+delete validators;
+
+// Fill the new validators array with all except the value to remove
+for (uint256 i = 0; i < original_validators.length; ++i) {
+    if (i != remove_idx) {
+        validators.push(original_validators[i]);
+    }
+}
+/** Optimized */
+
+uint256 length = validators.length - 1;
+
+unchecked {
+    for (uint256 i = remove_idx; i < length; i++) {
+        validators[i] = validators[i + 1]
+    }
+}
+
+validators.pop()
+```
+
+
