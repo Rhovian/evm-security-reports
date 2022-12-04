@@ -112,3 +112,15 @@ Validator storage v = validators[i];
 <br>
 
 - **X = X + Y is more efficient than X += Y**
+- **It costs more gas to initialize non-constant/non-immutable variables to zero than to let the default of zero be applied**
+- **Don't compare boolean expressions to boolean literals**
+
+```solidity
+// bad
+require(minters[msg.sender] == true, "Only minters");
+// good
+require(minters[msg.sender], "Only minters");
+```
+<br>
+
+- **State variables should be cached rather than re-reading from storage**
