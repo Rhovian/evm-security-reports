@@ -47,7 +47,7 @@ See [this](https://github.com/code-423n4/2022-09-frax-findings/issues/155) githu
 
 # Gas Optimizations
 
-- Deleting array element can use a more efficient algorithm. Found [here](https://github.com/code-423n4/2022-09-frax/blob/55ea6b1ef3857a277e2f47d42029bc0f3d6f9173/src/OperatorRegistry.sol#L107-L116) <br>
+- **Deleting array element can use a more efficient algorithm. Found [here](https://github.com/code-423n4/2022-09-frax/blob/55ea6b1ef3857a277e2f47d42029bc0f3d6f9173/src/OperatorRegistry.sol#L107-L116)** <br>
 
 ```solidity
 /** Not Optimized */
@@ -73,5 +73,31 @@ unchecked {
 }
 validators.pop()
 ```
+<br>
+
+- **Use functions instead of modifiers**
+- **Use custom errors instead of error strings to save gas**
+
+```solidity
+error NotOwnerOrTimelock();
+...
+
+*not optimized*
+require(msg.sender == timelock_address || msg.sender == owner, "Not owner or timelock");
+*optimized
+if(msg.sender != timelock_address && msg.sender != owner) revert NotOwnerOrTimelock();
+```
+<br>
+
+- **Using booleans for storage**
+
+```solidity
+// Booleans are more expensive than uint256 or any type that takes up a full
+// word because each write operation emits an extra SLOAD to first read the
+// slot's contents, replace the bits taken up by the boolean, and then write
+// back. This is the compiler's defense against contract upgrades and
+// pointer aliasing, and it cannot be disabled.
+```
+
 
 
