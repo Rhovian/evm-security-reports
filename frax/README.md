@@ -3,7 +3,7 @@ report: https://code4rena.com/reports/2022-09-frax/ <br>
 
 source code: https://github.com/code-423n4/2022-09-frax
 
-# General Notes
+# Protocol Notes
 
 ## ERC 4626 - Tokenized Vault Standard
 
@@ -14,15 +14,6 @@ source code: https://github.com/code-423n4/2022-09-frax
 [xERC-4626](https://github.com/fei-protocol/ERC4626/blob/main/src/xERC4626.sol)
 
 *An "xToken" popularized by SushiSwap with xSUSHI is a single-sided autocompounding token rewards module.*
-
-## Super
-Gives access to the immediate parent contract from which the current contract is derived.
-
-## Elliptic Curve Cryptography
-TBI
-
-## Boneh-Lynn-Shacham (BLS)
-TBI
 
 # Findings not covered in detail
 
@@ -124,3 +115,14 @@ require(minters[msg.sender], "Only minters");
 <br>
 
 - **State variables should be cached rather than re-reading from storage**
+
+# General Notes
+
+## Super
+Gives access to the immediate parent contract from which the current contract is derived.
+
+## Elliptic Curve Cryptography
+TBI
+
+## Boneh-Lynn-Shacham (BLS)
+TBI
