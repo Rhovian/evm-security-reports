@@ -122,7 +122,27 @@ require(minters[msg.sender], "Only minters");
 Gives access to the immediate parent contract from which the current contract is derived.
 
 ## Elliptic Curve Cryptography
-TBI
+
+- [wiki](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography)
+- [ECDSA](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm)
+<br>
+
+*Elliptic-curve cryptography (ECC) is an approach to [public-key cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography) based on the algebraic structure of elliptic curves over finite fields. ECC allows smaller keys compared to non-EC cryptography (based on plain Galois fields) to provide equivalent security.*
+<br>
+
+*Elliptic curves are applicable for [key agreement](https://en.wikipedia.org/wiki/Key-agreement_protocol), [digital signatures](https://en.wikipedia.org/wiki/Digital_signature), pseudo-random generators and other tasks.*
+<br>
+
+*The primary benefit promised by elliptic curve cryptography is a smaller key size, reducing storage and transmission requirements,[6] i.e. that an elliptic curve group could provide the same level of security afforded by an RSA-based system with a large modulus and correspondingly larger key: for example, a 256-bit elliptic curve public key should provide comparable security to a 3072-bit RSA public key.*
+
+
 
 ## Boneh-Lynn-Shacham (BLS)
-TBI
+
+- [wiki](https://en.wikipedia.org/wiki/BLS_digital_signature)
+<br>
+
+*A BLS digital signature— also known as Boneh–Lynn–Shacham[1] (BLS)—is a cryptographic signature scheme which allows a user to verify that a signer is authentic.*
+<br>
+
+*The scheme uses a bilinear pairing for verification, and signatures are elements of an elliptic curve group. Working in an elliptic curve group provides some defense against index calculus attacks (with the caveat that such attacks are still possible in the target group {\displaystyle G_{T}}G_{T} of the pairing), allowing shorter signatures than FDH signatures for a similar level of security.*
