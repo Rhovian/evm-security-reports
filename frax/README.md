@@ -116,6 +116,13 @@ require(minters[msg.sender], "Only minters");
 
 - **State variables should be cached rather than re-reading from storage**
 
+# Review
+
+**This section is primarily to identify and reinforce the mindset, and requirements to find the high risk and medium risk bugs.**
+<br>
+
+
+
 # General Notes
 
 ## Super
