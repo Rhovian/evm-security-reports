@@ -22,8 +22,25 @@ source code: https://github.com/code-423n4/2022-09-frax
 - [M-09](https://code4rena.com/reports/2022-09-frax/#m-09-recoverether-not-updating-currentwithheldeth-breaks-calculation-of-withheld-amount-for-further-deposits)
 
 ## Reasoning
-TBI
 
+The high severity bugs consisted of two major concepts:
+
+- Deep understanding of ``syncRewards()`` in ``xERC4626``, along with understanding of state impact through multiple cycles of user interaction.
+- Fundamental understanding of the beacon chain consensus specification, as well as an understanding of frontrunning.
+
+### Accounting logic
+
+For the first high-risk issue, the crux of the problem was how ``xERC46261`` was implemented in the ``sfrxETH`` contract. The fundamental issue was with the overriden function, ``beforeWithdraw`` that maps to the base ``ERC4626`` implementation. The accouting error was two parent contracts deep, and required understanding of the ``withdraw`` function in ``ERC4626`` that implements ``beforeWithdraw``.
+<br>
+
+With this information known, along with an understanding of how state changes affect multiple cycles of usage, it's not difficult to see how ``syncRewards`` will have faulty accouting.
+
+### Frontrunning validator
+
+This issue was more nuanced, because the only reason that this issue was categorized as high risk is because **Frax failed to disclose that they had ownership of all validators**. Why does this matter?
+<br>
+
+In summary, his vulnerability requires a malicious validator to generate a valid signature, and since Frax has ownership of all validators, and trust would be implicit for any users, the vulnerability could be contended. However, since Frax did not specify that they own all validator keys, the high severity payout was awarded. 
 
 # Low Severity Bugs
 
